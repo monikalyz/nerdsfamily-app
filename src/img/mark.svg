@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{fill:none;stroke:#0165FF;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<g id="Warstwa_1" class="st0">
+	
+		<image style="display:inline;overflow:visible;" width="32" height="32" xlink:href="mark.png"  transform="matrix(-1.13 0 0 -1.1212 34 33.7209)">
+	</image>
+</g>
+<g id="Warstwa_2">
+	<circle class="st1" cx="16.5" cy="16.5" r="12.5"/>
+	<path class="st1" d="M11.2,9.4c1.3,0.5,4.1,1.7,6.5,4.6c2.8,3.5,3.1,7.3,3.2,8.6"/>
+	<path class="st1" d="M20.9,22.7c-1.3-0.5-4.1-1.7-6.5-4.6c-2.8-3.5-3.1-7.3-3.2-8.6"/>
+</g>
+</svg>
