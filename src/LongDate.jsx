@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LongDate = ({created_at}) => {
+const LongDate = ({ created_at }) => {
     return ( 
         <>    
             {created_at.map((item, index) => (

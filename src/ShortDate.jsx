@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const ShortDate = ({created_at}) => {
+const ShortDate = ({ created_at }) => {
     return ( 
         <>    
             {created_at.map((item, index) => (
                 <Date key={index}>
-                    <Dot>•</Dot>{item.monthShort} {item.day}
+                    <Dot>•</Dot>{item.monthShort} {item.day < 10 ? "0"+item.day : item.day}
                 </Date>
             ))}
         </>

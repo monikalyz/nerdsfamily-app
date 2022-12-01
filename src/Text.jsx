@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Text = ({content}) => {
+const Text = ({ content }) => {
 
         return(
             <>    
