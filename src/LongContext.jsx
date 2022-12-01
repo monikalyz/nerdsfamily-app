@@ -6,7 +6,7 @@ const LongContext = ({ businessContext }) => {
   return (
     <>
       {businessContext.map((item, index) => (
-        <>
+        <Wrap key={index}>
           {item.status === "active" ? (
             <Content key={index}>
               <Title>{item.title}</Title>
@@ -29,11 +29,15 @@ const LongContext = ({ businessContext }) => {
               </Wrapper>
             </Content>
           ) : null}
-        </>
+        </Wrap>
       ))}
     </>
   );
 };
+
+const Wrap = styled.div`
+  width: 100%;
+`;
 
 const Content = styled.div`
   width: 100%;

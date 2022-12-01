@@ -9,6 +9,14 @@ import mark from "./img/mark.svg";
 import donatella from "./img/donatella.svg";
 import karem from "./img/karem.svg";
 import melisa from "./img/melisa.svg";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Routes,
+} from "react-router-dom";
+import NoMatch from "./NoMatch";
+import BlockedPage from "./BlockedPage";
 
 const date = new Date();
 const day = date.getDate();
@@ -16,7 +24,9 @@ const monthLong = date.toLocaleString("en", { month: "long" });
 const monthShort = date.toLocaleString("en", { month: "short" });
 const hour = date.getHours();
 const minutes = date.getMinutes();
-const time = `${hour}:${minutes}`;
+const time = `${hour < 10 ? "0" + hour : hour}:${
+  minutes < 10 ? "0" + minutes : minutes
+}`;
 
 const tasksarray = [
   {
@@ -29,7 +39,7 @@ const tasksarray = [
         status: "new",
         title: "Lorem ipsum dolor sit 🎉🙌",
         content: [
-          "Sed dui eros, euismod fringilla pellentesque nec, molestie sit amet sapien. Suspendisse sit amet viverra tellus.\r\n",
+          "Sed dui eros, euismod fringilla pellentesque nec, molestie sit amet sapien. Suspendisse sit amet viverra tellus.",
 
           "Sed sed ex ac dolor lobortis ultricies et et libero. Aenean porta viverra justo, quis tempor nisi pulvinar sed. Duis scelerisque fermentum nisi vel rutrum. Suspendisse et odio eu urna congue fringilla id quis purus. Sed id nunc id nulla luctus tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
 
@@ -88,6 +98,7 @@ const tasksarray = [
       },
     ],
     src: <img src={check} alt="" />,
+    path: "/nerdsfamily-app",
   },
   {
     id: "2",
@@ -156,6 +167,7 @@ const tasksarray = [
       },
     ],
     src: <img src={check} alt="" />,
+    path: "/static-books-list",
   },
   {
     id: "3",
@@ -226,6 +238,7 @@ const tasksarray = [
       },
     ],
     src: <img src={check} alt="" />,
+    path: "/administration-panel",
   },
   {
     id: "4",
@@ -298,6 +311,7 @@ const tasksarray = [
       },
     ],
     src: <img src={arrow} alt="" />,
+    path: "/connect-admin-with-frontend",
   },
   {
     id: "5",
@@ -368,50 +382,81 @@ const tasksarray = [
       },
     ],
     src: <img src={lock} alt="" />,
+    path: "/book-review-feature",
   },
 ];
 
 function App() {
   return (
-    <AppWrapper>
-      <GlobalResets />
-      <ListWrapper>
-        <Title>YOUR TASKS</Title>
-        <TasksList>
-          {tasksarray.map((item) => (
-            <a href={item.title} key={item.id}>
-              <Task key={item.id} {...item} />
-            </a>
-          ))}
-        </TasksList>
-      </ListWrapper>
-      <BusinessContextWrapper>
-        <ShortInfoTitle>
-          <img src={mark} alt="mark" />
-          <h2>Business Context</h2>
-        </ShortInfoTitle>
-        <BusinessContext>
-          <Short>
+    <Router>
+      <AppWrapper>
+        <GlobalResets />
+        <ListWrapper>
+          <Title>YOUR TASKS</Title>
+          <TasksList>
             {tasksarray.map((item, index) => (
-              <ShortContexts
-                key={index}
-                businessContext={item.businessContext}
-              />
+              <NavLink to={item.path} key={index}>
+                <Task key={item.id} {...item} />
+              </NavLink>
             ))}
-          </Short>
-          <Long>
-            {tasksarray.map((item, index) => (
-              <LongContext key={index} businessContext={item.businessContext} />
-            ))}
-          </Long>
-        </BusinessContext>
-      </BusinessContextWrapper>
-    </AppWrapper>
+          </TasksList>
+        </ListWrapper>
+        <BusinessContextWrapper>
+          <ShortInfoTitle>
+            <img src={mark} alt="mark" />
+            <h2>Business Context</h2>
+          </ShortInfoTitle>
+          <BusinessContext>
+            <Short>
+              {tasksarray.map((item, index) => (
+                <Routes key={index}>
+                  <Route
+                    key={index}
+                    exact
+                    path={item.path}
+                    element={
+                      <ShortContexts
+                        key={index}
+                        businessContext={item.businessContext}
+                      />
+                    }
+                  ></Route>
+                  <Route path="*" element={<NoMatch />} />
+                </Routes>
+              ))}
+            </Short>
+            <Long>
+              {tasksarray.map((item, index) => (
+                <Routes key={index}>
+                  <Route
+                    key={index}
+                    exact
+                    path={item.path}
+                    element={
+                      item.status !== "blocked" ? (
+                        <LongContext
+                          key={index}
+                          businessContext={item.businessContext}
+                        />
+                      ) : (
+                        <BlockedPage />
+                      )
+                    }
+                  ></Route>
+                  <Route path="*" element={<NoMatch />} />
+                </Routes>
+              ))}
+            </Long>
+          </BusinessContext>
+        </BusinessContextWrapper>
+      </AppWrapper>
+    </Router>
   );
 }
 
 const AppWrapper = styled.div`
   height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   padding-top: 30px;
@@ -474,6 +519,7 @@ const BusinessContextWrapper = styled.div`
   background-color: #fff;
   border-radius: 15px 15px;
   margin-bottom: 30px;
+  min-height: 100vh;
 `;
 
 const ShortInfoTitle = styled.div`
@@ -505,6 +551,7 @@ const ShortInfoTitle = styled.div`
 const BusinessContext = styled.div`
   border-top: 1px solid #f4f5f7;
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
 `;

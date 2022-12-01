@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ShortDate from "./ShortDate";
 
-const ShortContext = ({businessContext}) => {
+const ShortContext = ({ businessContext }) => {
   
   return (
     <>
